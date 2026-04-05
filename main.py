@@ -6,7 +6,6 @@ from app.controllers.forum_controller import router as forum_router
 from app.controllers.park_controller import router as park_router
 from app.controllers.exercise_controller import router as exercise_router
 from app.controllers.health_controller import router as health_router
-from app.db import init_db
 
 app = FastAPI(
     title="ReActivate Pro API",
@@ -28,10 +27,6 @@ app.include_router(forum_router, prefix="/api/forum", tags=["forum"])
 app.include_router(park_router, prefix="/api/parks", tags=["parks"])
 app.include_router(exercise_router, prefix="/api/exercises", tags=["exercises"])
 app.include_router(health_router, prefix="/api/health", tags=["health"])
-
-@app.on_event("startup")
-async def startup_event():
-    init_db()
 
 @app.get("/api/healthcheck")
 def healthcheck():
