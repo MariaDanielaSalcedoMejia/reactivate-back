@@ -6,12 +6,22 @@ from app.controllers.forum_controller import router as forum_router
 from app.controllers.park_controller import router as park_router
 from app.controllers.exercise_controller import router as exercise_router
 from app.controllers.health_controller import router as health_router
+from app.db import init_db
+from app.config import DATABASE_URL
 
 app = FastAPI(
     title="ReActivate Pro API",
     description="Backend Python para la app de ReActivate Pro",
     version="1.0.0"
 )
+
+# Initialize database tables on startup (only for SQLite development)
+@app.on_event("startup")
+def startup():
+    # Only initialize DB for SQLite (local development)
+    # PostgreSQL (production) already has the schema
+    if DATABASE_URL.startswith('sqlite'):
+        init_db()
 
 app.add_middleware(
     CORSMiddleware,
