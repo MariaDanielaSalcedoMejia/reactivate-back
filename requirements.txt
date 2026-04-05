@@ -1,6 +1,6 @@
 fastapi==0.111.1
 uvicorn[standard]==0.24.0
 SQLAlchemy==2.0.22
-pydantic==2.13.0
+pydantic==2.12.5
 passlib[bcrypt]==1.7.4
 python-dotenv==1.0.0
