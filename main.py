@@ -14,7 +14,7 @@ from app.config import DATABASE_URL
 app = FastAPI(
     title="ReActivate Pro API",
     description="Backend Python para la app de ReActivate Pro",
-    version="1.0.0"
+    version="1.0.1"  # Updated version to force redeploy
 )
 
 # Initialize database tables on startup (only for SQLite development)
