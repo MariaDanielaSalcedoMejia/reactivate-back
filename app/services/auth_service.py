@@ -25,9 +25,7 @@ class AuthService:
             raise ValueError('El correo ya está registrado')
 
         password_hash = AuthService.hash_password(password)
-        user = UserRepository.create(db, name, email, password_hash, birth_date=birth_date)
-        print(f"User created: {user.id}, {user.name}, {user.email}")  # Debug log
-        return user
+        return UserRepository.create(db, name, email, password_hash, birth_date=birth_date)
 
     @staticmethod
     def login(db: Session, email: str, password: str) -> User | None:
