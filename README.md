@@ -16,8 +16,9 @@ Este backend en Python está diseñado para integrarse con el front-end de `reac
    python -m venv .venv
    .\.venv\Scripts\Activate.ps1
    ```
-2. Instalar dependencias:
+2. Actualizar herramientas y dependencias:
    ```powershell
+   pip install --upgrade pip setuptools wheel
    pip install -r requirements.txt
    ```
 3. Iniciar el servidor:
@@ -25,7 +26,8 @@ Este backend en Python está diseñado para integrarse con el front-end de `reac
    uvicorn main:app --reload
    ```
 
-> Para desplegar en Render, usa Python 3.12 (se especifica en `runtime.txt`).
+> Para desplegar en Render, usa Python 3.12.15.
+> El proyecto incluye `runtime.txt`, `.python-version` y `render.yaml` para fijar el entorno y evitar compilaciones de Rust.
 
 ## Endpoints principales
 - `POST /api/auth/register`
