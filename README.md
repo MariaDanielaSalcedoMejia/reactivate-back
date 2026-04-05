@@ -25,6 +25,8 @@ Este backend en Python está diseñado para integrarse con el front-end de `reac
    uvicorn main:app --reload
    ```
 
+> Para desplegar en Render, usa Python 3.12 (se especifica en `runtime.txt`).
+
 ## Endpoints principales
 - `POST /api/auth/register`
 - `POST /api/auth/login`
