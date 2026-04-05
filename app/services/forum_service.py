@@ -1,101 +1,85 @@
-from app.schemas.forum import ForumPostCreate
+from datetime import datetime
 from typing import List
 
+from sqlalchemy.orm import Session
+from app.schemas.forum import ForumPostCreate
+from app.repositories.forum_repository import ForumRepository
+from app.repositories.user_repository import UserRepository
+
+
+def format_time_ago(created_at: datetime) -> str:
+    delta = datetime.utcnow() - created_at
+    if delta.days >= 1:
+        return f"{delta.days} día{'s' if delta.days != 1 else ''}"
+    hours = delta.seconds // 3600
+    if hours >= 1:
+        return f"{hours} hora{'s' if hours != 1 else ''}"
+    minutes = delta.seconds // 60
+    if minutes >= 1:
+        return f"{minutes} minuto{'s' if minutes != 1 else ''}"
+    return 'Ahora mismo'
+
+
 class ForumService:
-    categories = [
-        {
-            'name': 'Ejercicios y Rutinas',
-            'description': 'Comparte tus rutinas favoritas y pide consejos sobre ejercicios',
-            'icon': '🏃',
-            'posts': 423,
-            'topics': 67
-        },
-        {
-            'name': 'Nutrición y Alimentación',
-            'description': 'Discusiones sobre alimentación saludable para personas mayores',
-            'icon': '🥗',
-            'posts': 298,
-            'topics': 45
-        },
-        {
-            'name': 'Salud y Bienestar',
-            'description': 'Consejos sobre salud, prevención y bienestar general',
-            'icon': '❤️',
-            'posts': 356,
-            'topics': 52
-        },
-        {
-            'name': 'Motivación y Experiencias',
-            'description': 'Historias de éxito, motivación y experiencias personales',
-            'icon': '💪',
-            'posts': 170,
-            'topics': 28
+    @staticmethod
+    def list_categories(db: Session) -> List[dict]:
+        categories = ForumRepository.list_categories(db)
+        return [
+            {
+                'name': category.name,
+                'description': category.description or '',
+                'icon': category.icon or '',
+                'posts': len(category.posts),
+                'topics': len(category.posts)
+            }
+            for category in categories
+        ]
+
+    @staticmethod
+    def list_posts(db: Session) -> List[dict]:
+        posts = ForumRepository.list_posts(db)
+        return [
+            {
+                'id': post.id,
+                'title': post.title,
+                'excerpt': post.excerpt or '',
+                'author': post.author.name if post.author else 'Anónimo',
+                'time_ago': format_time_ago(post.created_at),
+                'category': post.category.name if post.category else 'Sin categoría',
+                'likes': post.likes_count,
+                'replies': post.replies_count
+            }
+            for post in posts
+        ]
+
+    @staticmethod
+    def create_post(db: Session, data: ForumPostCreate) -> dict:
+        category = ForumRepository.get_category_by_name(db, data.category)
+        if category is None:
+            category = ForumRepository.create_category(db, data.category, description='', icon='')
+
+        author = None
+        if '@' in data.author:
+            author = UserRepository.get_by_email(db, data.author)
+        else:
+            author = UserRepository.get_by_name(db, data.author)
+
+        forum_post = ForumRepository.create_post(
+            db,
+            title=data.title,
+            content=data.content,
+            excerpt=data.excerpt,
+            author_id=author.id if author else None,
+            category_id=category.id
+        )
+
+        return {
+            'id': forum_post.id,
+            'title': forum_post.title,
+            'excerpt': forum_post.excerpt or '',
+            'author': forum_post.author.name if forum_post.author else data.author,
+            'category': category.name,
+            'time_ago': format_time_ago(forum_post.created_at),
+            'likes': forum_post.likes_count,
+            'replies': forum_post.replies_count
         }
-    ]
-
-    posts = [
-        {
-            'id': 1,
-            'title': 'Mi rutina matutina de 15 minutos que cambió mi día',
-            'excerpt': 'Desde que empecé con estos ejercicios simples cada mañana, me siento con más energía...',
-            'author': 'María González',
-            'time_ago': '2 horas',
-            'category': 'Ejercicios',
-            'likes': 12,
-            'replies': 5
-        },
-        {
-            'id': 2,
-            'title': '¿Recomendaciones para caminar con artritis?',
-            'excerpt': 'Tengo artritis en las rodillas y me gustaría empezar a caminar. ¿Algún consejo?',
-            'author': 'Carlos Rodríguez',
-            'time_ago': '4 horas',
-            'category': 'Salud',
-            'likes': 8,
-            'replies': 12
-        },
-        {
-            'id': 3,
-            'title': 'Recetas fáciles y saludables para el desayuno',
-            'excerpt': 'Comparto algunas ideas de desayunos nutritivos que preparo en menos de 10 minutos...',
-            'author': 'Ana López',
-            'time_ago': '6 horas',
-            'category': 'Nutrición',
-            'likes': 15,
-            'replies': 7
-        },
-        {
-            'id': 4,
-            'title': 'Cómo mantener la motivación después de los 70',
-            'excerpt': 'Después de varios intentos fallidos, finalmente encontré la manera de mantenerme motivada...',
-            'author': 'José Martínez',
-            'time_ago': '1 día',
-            'category': 'Motivación',
-            'likes': 23,
-            'replies': 18
-        }
-    ]
-
-    @classmethod
-    def list_categories(cls) -> List[dict]:
-        return cls.categories
-
-    @classmethod
-    def list_posts(cls) -> List[dict]:
-        return cls.posts
-
-    @classmethod
-    def create_post(cls, data: ForumPostCreate) -> dict:
-        new_id = max(post['id'] for post in cls.posts) + 1 if cls.posts else 1
-        post = {
-            'id': new_id,
-            'title': data.title,
-            'excerpt': data.excerpt,
-            'author': data.author,
-            'category': data.category,
-            'time_ago': 'Ahora mismo',
-            'likes': 0,
-            'replies': 0
-        }
-        cls.posts.insert(0, post)
-        return post

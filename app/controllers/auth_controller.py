@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post('/register', response_model=UserResponse)
 def register(payload: RegisterRequest, db: Session = Depends(get_db)):
     try:
-        user = AuthService.register(db, payload.name, payload.age, payload.email, payload.password)
+        user = AuthService.register(db, payload.name, payload.email, payload.password, payload.birth_date)
         return user
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))

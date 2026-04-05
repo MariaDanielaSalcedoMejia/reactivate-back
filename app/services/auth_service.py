@@ -1,3 +1,5 @@
+from datetime import date
+
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from app.repositories.user_repository import UserRepository
@@ -5,6 +7,7 @@ from app.models.user import User
 from typing import Optional
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 class AuthService:
     @staticmethod
@@ -16,13 +19,13 @@ class AuthService:
         return pwd_context.verify(password, password_hash)
 
     @staticmethod
-    def register(db: Session, name: str, age: int, email: str, password: str) -> User:
+    def register(db: Session, name: str, email: str, password: str, birth_date: date | None = None) -> User:
         existing = UserRepository.get_by_email(db, email)
         if existing:
             raise ValueError('El correo ya está registrado')
 
         password_hash = AuthService.hash_password(password)
-        return UserRepository.create(db, name, age, email, password_hash)
+        return UserRepository.create(db, name, email, password_hash, birth_date=birth_date)
 
     @staticmethod
     def login(db: Session, email: str, password: str) -> User | None:
