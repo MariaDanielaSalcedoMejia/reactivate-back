@@ -8,15 +8,16 @@ router = APIRouter()
 
 @router.post('/register', response_model=UserResponse)
 def register(payload: RegisterRequest, db: Session = Depends(get_db)):
+    print(f"Register attempt: {payload.name}, {payload.email}")  # Debug log
     try:
         user = AuthService.register(db, payload.name, payload.email, payload.password, payload.birth_date)
-        db.commit()  # Explicitly commit after registration
+        print(f"Registration successful: {user.id}")  # Debug log
         return user
     except ValueError as exc:
-        db.rollback()
+        print(f"Registration failed: {exc}")  # Debug log
         raise HTTPException(status_code=400, detail=str(exc))
     except Exception as exc:
-        db.rollback()
+        print(f"Registration error: {exc}")  # Debug log
         raise HTTPException(status_code=500, detail=str(exc))
 
 @router.post('/login', response_model=UserResponse)

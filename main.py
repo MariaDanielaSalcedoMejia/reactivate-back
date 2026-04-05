@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
+from sqlalchemy.orm import Session
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.blog_controller import router as blog_router
 from app.controllers.forum_controller import router as forum_router
 from app.controllers.park_controller import router as park_router
 from app.controllers.exercise_controller import router as exercise_router
 from app.controllers.health_controller import router as health_router
-from app.db import init_db
+from app.db import init_db, get_db
 from app.config import DATABASE_URL
 
 app = FastAPI(
@@ -39,5 +41,10 @@ app.include_router(exercise_router, prefix="/api/exercises", tags=["exercises"])
 app.include_router(health_router, prefix="/api/health", tags=["health"])
 
 @app.get("/api/healthcheck")
-def healthcheck():
-    return {"status": "ok"}
+def healthcheck(db: Session = Depends(get_db)):
+    try:
+        # Test database connection
+        db.execute(text("SELECT 1"))
+        return {"status": "ok", "database": "connected"}
+    except Exception as e:
+        return {"status": "error", "database": str(e)}

@@ -25,5 +25,4 @@ class UserRepository:
         db.add(user)
         db.flush()  # Flush to assign ID
         db.refresh(user)  # Refresh to get all fields from DB
-        db.commit()  # Commit to persist changes
         return user
