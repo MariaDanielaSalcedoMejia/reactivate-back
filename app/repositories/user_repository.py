@@ -23,6 +23,7 @@ class UserRepository:
             role=role
         )
         db.add(user)
-        db.commit()
-        db.refresh(user)
+        db.flush()  # Flush to assign ID
+        db.refresh(user)  # Refresh to get all fields from DB
+        db.commit()  # Commit to persist changes
         return user
