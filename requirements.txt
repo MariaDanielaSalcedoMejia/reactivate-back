@@ -1,6 +1,6 @@
 fastapi==0.111.1
 uvicorn[standard]==0.24.0
 SQLAlchemy==2.0.22
-pydantic==2.9.0
+pydantic==2.45.0       # actualizado para evitar compilación
 passlib[bcrypt]==1.7.4
 python-dotenv==1.0.0
