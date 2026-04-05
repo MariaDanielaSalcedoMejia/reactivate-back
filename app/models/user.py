@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, Date, DateTime, Text
+from sqlalchemy.orm import relationship
 from .base import Base
 
 
@@ -15,3 +16,6 @@ class User(Base):
     role = Column(String(20), nullable=False, default='user')
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationships
+    forum_comments = relationship('ForumComment', back_populates='author')
