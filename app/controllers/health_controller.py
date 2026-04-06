@@ -24,11 +24,7 @@ def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(
 
 
 # 🔹 OBTENER PERFIL
-@router.get('/{user_id}', response_model=HealthProfileResponse)
+@router.get('/{user_id}', response_model=HealthProfileResponse | None)
 def get_profile(user_id: int, db: Session = Depends(get_db)):
     profile = HealthService.get_profile(db, user_id)
-
-    if not profile:
-        raise HTTPException(status_code=404, detail="Perfil no encontrado")
-
     return profile
