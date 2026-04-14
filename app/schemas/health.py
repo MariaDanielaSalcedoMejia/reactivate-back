@@ -8,6 +8,7 @@ class HealthProfileCreate(BaseModel):
     age: int | None = None
 
 class HealthProfileResponse(BaseModel):
+    id: int
     user_id: int
     height_cm: float
     weight_kg: float

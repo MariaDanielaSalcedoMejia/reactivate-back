@@ -4,16 +4,28 @@ from sqlalchemy.orm import Session
 from app.services.health_service import HealthService
 from app.schemas.health import HealthProfileCreate, HealthProfileResponse, HealthAnalysisResponse, HealthHistoryResponse
 from app.db import get_db
+from app.repositories.user_repository import UserRepository
 
 router = APIRouter()
 
 # 🔹 GUARDAR / ACTUALIZAR PERFIL
 @router.post('/{user_id}', response_model=HealthProfileResponse)
 def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(get_db)):
+    """Guardar o actualizar perfil de salud del usuario"""
     try:
+        # Validar que el usuario existe
+        user_exists = UserRepository.get_by_id(db, user_id) is not None
+        if not user_exists:
+            raise HTTPException(status_code=404, detail=f'Usuario {user_id} no existe')
+        
+        # Validar datos
         if data.height_cm <= 0 or data.weight_kg <= 0 or data.resting_hr < 0:
             raise HTTPException(status_code=400, detail='Los valores deben ser mayores a 0')
         
+        if data.resting_hr > 200:
+            raise HTTPException(status_code=400, detail='FC en reposo inválida (>200)')
+        
+        # Crear o actualizar profile
         profile = HealthService.create_or_update_profile(
             db,
             user_id,
@@ -23,10 +35,15 @@ def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(
             data.age
         )
         return profile
+    except HTTPException:
+        raise
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error saving health profile: {e}")  # Log para debug
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f'Error guardando perfil: {str(e)}')
 
 
 # 🔹 OBTENER PERFIL ACTUAL
