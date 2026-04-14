@@ -18,18 +18,13 @@ app = FastAPI(
     version="1.1.0"  # Version con historial de salud
 )
 
-# Initialize database tables on startup (only for SQLite development)
+# Initialize database tables on startup
 @app.on_event("startup")
 def startup():
     try:
-        # Only initialize DB for SQLite (local development)
-        # PostgreSQL (production) already has the schema
-        if DATABASE_URL.startswith('sqlite'):
-            print("🔧 Initializing SQLite database...")
-            init_db()
-            print("✅ Database initialized successfully")
-        else:
-            print("✅ Using PostgreSQL - skipping database initialization")
+        print("🔧 Initializing database tables (create_all)...")
+        init_db()
+        print("✅ Database tables initialized successfully")
     except Exception as e:
         print(f"❌ ERROR during startup: {str(e)}")
         raise
