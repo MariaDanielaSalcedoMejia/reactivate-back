@@ -95,7 +95,14 @@ def get_profile(user_id: int, db: Session = Depends(get_db)):
 # 🔹 ELIMINAR PERFIL
 @router.delete('/{user_id}')
 def delete_profile(user_id: int, db: Session = Depends(get_db)):
-    success = HealthService.delete_profile(db, user_id)
-    if not success:
-        raise HTTPException(status_code=404, detail='Perfil no encontrado')
-    return {"message": "Perfil de salud eliminado correctamente"}
+    try:
+        success = HealthService.delete_profile(db, user_id)
+        if not success:
+            raise HTTPException(status_code=404, detail='Perfil no encontrado')
+        db.commit()
+        return {"message": "Perfil de salud eliminado correctamente"}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(exc))
