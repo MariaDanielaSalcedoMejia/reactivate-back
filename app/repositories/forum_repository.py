@@ -24,6 +24,10 @@ class ForumRepository:
         return db.query(ForumPost).order_by(ForumPost.created_at.desc()).all()
 
     @staticmethod
+    def get_post(db: Session, post_id: int) -> ForumPost | None:
+        return db.query(ForumPost).filter(ForumPost.id == post_id).first()
+
+    @staticmethod
     def create_post(db: Session, title: str, content: str, excerpt: str | None, author_id: int | None, category_id: int | None) -> ForumPost:
         post = ForumPost(
             title=title,
@@ -36,3 +40,12 @@ class ForumRepository:
         db.commit()
         db.refresh(post)
         return post
+
+    @staticmethod
+    def delete_post(db: Session, post_id: int) -> bool:
+        post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
+        if not post:
+            return False
+        db.delete(post)
+        db.commit()
+        return True

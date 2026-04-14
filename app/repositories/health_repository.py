@@ -32,3 +32,12 @@ class HealthRepository:
         db.commit()
         db.refresh(profile)
         return profile
+
+    @staticmethod
+    def delete_profile(db: Session, user_id: int) -> bool:
+        profile = db.query(HealthProfile).filter(HealthProfile.user_id == user_id).first()
+        if not profile:
+            return False
+        db.delete(profile)
+        db.commit()
+        return True

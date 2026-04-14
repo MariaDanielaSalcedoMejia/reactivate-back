@@ -10,6 +10,10 @@ class UserRepository:
         return db.query(User).filter(User.email == email).first()
 
     @staticmethod
+    def get_by_id(db: Session, user_id: int) -> User | None:
+        return db.query(User).filter(User.id == user_id).first()
+
+    @staticmethod
     def get_by_name(db: Session, name: str) -> User | None:
         return db.query(User).filter(User.name == name).first()
 

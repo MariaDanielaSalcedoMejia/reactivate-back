@@ -6,6 +6,10 @@ class BlogPostCreate(BaseModel):
     content: str
     author_email: str
 
+class BlogPostUpdate(BaseModel):
+    title: str | None = None
+    content: str | None = None
+
 class BlogPostResponse(BaseModel):
     id: int
     title: str

@@ -36,6 +36,17 @@ class ForumService:
         ]
 
     @staticmethod
+    def create_category(db: Session, name: str, description: str | None, icon: str | None) -> dict:
+        category = ForumRepository.create_category(db, name, description, icon)
+        return {
+            'name': category.name,
+            'description': category.description or '',
+            'icon': category.icon or '',
+            'posts': 0,
+            'topics': 0
+        }
+
+    @staticmethod
     def list_posts(db: Session) -> List[dict]:
         posts = ForumRepository.list_posts(db)
         return [
@@ -51,6 +62,22 @@ class ForumService:
             }
             for post in posts
         ]
+
+    @staticmethod
+    def get_post(db: Session, post_id: int) -> dict | None:
+        post = ForumRepository.get_post(db, post_id)
+        if not post:
+            return None
+        return {
+            'id': post.id,
+            'title': post.title,
+            'excerpt': post.excerpt or '',
+            'author': post.author.name if post.author else 'Anónimo',
+            'time_ago': format_time_ago(post.created_at),
+            'category': post.category.name if post.category else 'Sin categoría',
+            'likes': post.likes_count,
+            'replies': post.replies_count
+        }
 
     @staticmethod
     def create_post(db: Session, data: ForumPostCreate) -> dict:
@@ -83,3 +110,7 @@ class ForumService:
             'likes': forum_post.likes_count,
             'replies': forum_post.replies_count
         }
+
+    @staticmethod
+    def delete_post(db: Session, post_id: int) -> bool:
+        return ForumRepository.delete_post(db, post_id)

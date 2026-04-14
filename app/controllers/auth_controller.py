@@ -29,3 +29,11 @@ def me(email: str, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail='Usuario no encontrado')
     return user
+
+@router.get('/user/{user_id}', response_model=UserResponse)
+def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
+    from app.repositories.user_repository import UserRepository
+    user = db.query(UserRepository.__mapper__.entity).filter_by(id=user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail='Usuario no encontrado')
+    return user

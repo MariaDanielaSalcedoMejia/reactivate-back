@@ -1,0 +1,642 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sentadillas",
+    "tipo": "piernas",
+    "descripcion": "Ejercicio fundamental para piernas. Fortalece cuádriceps, glúteos y pantorrillas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Sentadillas&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 2,
+    "nombre": "Estocadas",
+    "tipo": "piernas",
+    "descripcion": "Alternancia de piernas para balance y fuerza unilateral.",
+    "imagen": "https://via.placeholder.com/300x200?text=Estocadas&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 3,
+    "nombre": "Extensiones de pierna",
+    "tipo": "piernas",
+    "descripcion": "Aislamiento de cuádriceps. Excelente para rehab.",
+    "imagen": "https://via.placeholder.com/300x200?text=Extensiones&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 4,
+    "nombre": "Curl de pierna",
+    "tipo": "piernas",
+    "descripcion": "Trabaja isquiotibiales y flexores de cadera.",
+    "imagen": "https://via.placeholder.com/300x200?text=Curl+Pierna&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 5,
+    "nombre": "Prensa de pierna",
+    "tipo": "piernas",
+    "descripcion": "Máquina para cuádriceps, glúteos y pantorrillas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Prensa&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 6,
+    "nombre": "Levantamiento de pantorrillas",
+    "tipo": "piernas",
+    "descripcion": "Trabaja específicamente los músculos de la pantorrilla.",
+    "imagen": "https://via.placeholder.com/300x200?text=Pantorrillas&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 7,
+    "nombre": "Zancadas con salto",
+    "tipo": "piernas",
+    "descripcion": "Ejercicio pliométrico para potencia en piernas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Zancadas+Salto&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 8,
+    "nombre": "Puente de glúteos",
+    "tipo": "piernas",
+    "descripcion": "Aislamiento específico de glúteos y cadena posterior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Puente&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 9,
+    "nombre": "Sentadilla búlgara",
+    "tipo": "piernas",
+    "descripcion": "Profunda, unilateral, excelente para fuerza.",
+    "imagen": "https://via.placeholder.com/300x200?text=Sentadilla+Bulgara&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 10,
+    "nombre": "Sentadilla sissy",
+    "tipo": "piernas",
+    "descripcion": "Aislamiento extremo de cuádriceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Sissy&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 11,
+    "nombre": "Leg press inclinado",
+    "tipo": "piernas",
+    "descripcion": "Variante de prensa con ángulo.",
+    "imagen": "https://via.placeholder.com/300x200?text=Leg+Press&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 12,
+    "nombre": "Saltos al cajón",
+    "tipo": "piernas",
+    "descripcion": "Pliometría explosiva para potencia.",
+    "imagen": "https://via.placeholder.com/300x200?text=Saltos+Cajon&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 13,
+    "nombre": "Step ups",
+    "tipo": "piernas",
+    "descripcion": "Subidas a plataforma elevada.",
+    "imagen": "https://via.placeholder.com/300x200?text=Step+Ups&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 14,
+    "nombre": "Hip thrust",
+    "tipo": "piernas",
+    "descripcion": "Activación máxima de glúteos.",
+    "imagen": "https://via.placeholder.com/300x200?text=Hip+Thrust&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 15,
+    "nombre": "Sentadilla goblet",
+    "tipo": "piernas",
+    "descripcion": "Con peso sostenido al pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Goblet&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 16,
+    "nombre": "Abducción de cadera",
+    "tipo": "piernas",
+    "descripcion": "Trabaja glúteo medio y lateral.",
+    "imagen": "https://via.placeholder.com/300x200?text=Abduccion&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 17,
+    "nombre": "Aducción de cadera",
+    "tipo": "piernas",
+    "descripcion": "Interno de muslo y aductores.",
+    "imagen": "https://via.placeholder.com/300x200?text=Aduccion&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 18,
+    "nombre": "Burpees",
+    "tipo": "piernas",
+    "descripcion": "Ejercicio full-body explosivo.",
+    "imagen": "https://via.placeholder.com/300x200?text=Burpees&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 19,
+    "nombre": "Mountain climbers",
+    "tipo": "piernas",
+    "descripcion": "Dinámico, cardio con trabajo de core.",
+    "imagen": "https://via.placeholder.com/300x200?text=Mountain+Climbers&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 20,
+    "nombre": "Patada trasera",
+    "tipo": "piernas",
+    "descripcion": "Activación de glúteos e isquiotibiales.",
+    "imagen": "https://via.placeholder.com/300x200?text=Patada+Trasera&bg=3498db",
+    "parque": "Gym"
+  },
+  {
+    "id": 21,
+    "nombre": "Flexiones",
+    "tipo": "brazos",
+    "descripcion": "Clásico ejercicio de peso corporal. Pecho, hombros y tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Flexiones&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 22,
+    "nombre": "Curl de bíceps",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento de bíceps con mancuerna o barra.",
+    "imagen": "https://via.placeholder.com/300x200?text=Curl+Biceps&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 23,
+    "nombre": "Extensión de tríceps",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento de tríceps en todas sus cabezas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Triceps&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 24,
+    "nombre": "Fondos",
+    "tipo": "brazos",
+    "descripcion": "Peso corporal para pecho y tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Fondos&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 25,
+    "nombre": "Dominadas",
+    "tipo": "brazos",
+    "descripcion": "Máximo aislamiento de espalda y bíceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Dominadas&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 26,
+    "nombre": "Poleas altas",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento de bíceps y espalda alta.",
+    "imagen": "https://via.placeholder.com/300x200?text=Poleas+Altas&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 27,
+    "nombre": "Press francés",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento total de tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Press+Frances&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 28,
+    "nombre": "Curl martillo",
+    "tipo": "brazos",
+    "descripcion": "Trabaja bíceps y braquial anterior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Curl+Martillo&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 29,
+    "nombre": "Curl concentrado",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento extremo del bíceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Curl+Concentrado&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 30,
+    "nombre": "Extensión por encima",
+    "tipo": "brazos",
+    "descripcion": "Máxima contracción de tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Ext+Encima&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 31,
+    "nombre": "Fondos en banco",
+    "tipo": "brazos",
+    "descripcion": "Peso corporal modificado para tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Fondos+Banco&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 32,
+    "nombre": "Curl con barra Z",
+    "tipo": "brazos",
+    "descripcion": "Variante ergonómica de curl.",
+    "imagen": "https://via.placeholder.com/300x200?text=Barra+Z&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 33,
+    "nombre": "Flexiones diamante",
+    "tipo": "brazos",
+    "descripcion": "Énfasis en tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Flexiones+Diamante&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 34,
+    "nombre": "Dominada inversa",
+    "tipo": "brazos",
+    "descripcion": "Espalda baja con énfasis en bíceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Dominada+Inversa&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 35,
+    "nombre": "Bandas de resistencia",
+    "tipo": "brazos",
+    "descripcion": "Flexibilidad para bíceps y tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Bandas&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 36,
+    "nombre": "Cable curls",
+    "tipo": "brazos",
+    "descripcion": "Tensión constante en el bíceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Cable+Curls&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 37,
+    "nombre": "Patada de tríceps",
+    "tipo": "brazos",
+    "descripcion": "Aislamiento con cable o banda.",
+    "imagen": "https://via.placeholder.com/300x200?text=Patada+Triceps&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 38,
+    "nombre": "Curl alterno",
+    "tipo": "brazos",
+    "descripcion": "Alternancia de brazos con mancuernas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Curl+Alterno&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 39,
+    "nombre": "Fondos asistidos",
+    "tipo": "brazos",
+    "descripcion": "Máquina para fondos sin peso corporal.",
+    "imagen": "https://via.placeholder.com/300x200?text=Fondos+Asistidos&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 40,
+    "nombre": "Ejercicio EZ bar",
+    "tipo": "brazos",
+    "descripcion": "Con barra rizada para menor tensión de muñeca.",
+    "imagen": "https://via.placeholder.com/300x200?text=EZ+Bar&bg=e74c3c",
+    "parque": "Gym"
+  },
+  {
+    "id": 41,
+    "nombre": "Press de banca",
+    "tipo": "pecho",
+    "descripcion": "Rey del pecho. Trabajo de pecho, hombros y tríceps.",
+    "imagen": "https://via.placeholder.com/300x200?text=Press+Banca&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 42,
+    "nombre": "Press inclinado",
+    "tipo": "pecho",
+    "descripcion": "Énfasis en pecho superior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Press+Inclinado&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 43,
+    "nombre": "Press declinado",
+    "tipo": "pecho",
+    "descripcion": "Énfasis en pecho inferior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Press+Declinado&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 44,
+    "nombre": "Aperturas de pecho",
+    "tipo": "pecho",
+    "descripcion": "Aislamiento puro del pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Aperturas&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 45,
+    "nombre": "Aperturas inclinadas",
+    "tipo": "pecho",
+    "descripcion": "Aperturas para el pecho superior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Aperturas+Inc&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 46,
+    "nombre": "Press con mancuernas",
+    "tipo": "pecho",
+    "descripcion": "Mayor rango de movimiento que barra.",
+    "imagen": "https://via.placeholder.com/300x200?text=Press+Mancuernas&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 47,
+    "nombre": "Máquina de pecho",
+    "tipo": "pecho",
+    "descripcion": "Máquina guiada para pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Maquina+Pecho&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 48,
+    "nombre": "Flexiones inclinadas",
+    "tipo": "pecho",
+    "descripcion": "Flexión con manos elevadas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Flexiones+Inc&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 49,
+    "nombre": "Flexiones declinadas",
+    "tipo": "pecho",
+    "descripcion": "Flexión con pies elevados.",
+    "imagen": "https://via.placeholder.com/300x200?text=Flexiones+Dec&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 50,
+    "nombre": "Cable crossover",
+    "tipo": "pecho",
+    "descripcion": "Aislamiento de pecho con cables.",
+    "imagen": "https://via.placeholder.com/300x200?text=Cable+Crossover&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 51,
+    "nombre": "Peck deck",
+    "tipo": "pecho",
+    "descripcion": "Máquina específica de pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Peck+Deck&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 52,
+    "nombre": "Push ups agresivos",
+    "tipo": "pecho",
+    "descripcion": "Flexiones explosivas con aplausos.",
+    "imagen": "https://via.placeholder.com/300x200?text=Push+Ups+Agresivos&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 53,
+    "nombre": "Prensa Smith",
+    "tipo": "pecho",
+    "descripcion": "Barra guiada para pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Smith+Prensa&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 54,
+    "nombre": "Fondos pecho",
+    "tipo": "pecho",
+    "descripcion": "Fondos con inclinación hacia adelante.",
+    "imagen": "https://via.placeholder.com/300x200?text=Fondos+Pecho&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 55,
+    "nombre": "Aperturas con polea baja",
+    "tipo": "pecho",
+    "descripcion": "Aislamiento de pecho inferior.",
+    "imagen": "https://via.placeholder.com/300x200?text=Polea+Baja&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 56,
+    "nombre": "Press máquina 45°",
+    "tipo": "pecho",
+    "descripcion": "Máquina con angulación.",
+    "imagen": "https://via.placeholder.com/300x200?text=Maq+45&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 57,
+    "nombre": "Flexiones laterales",
+    "tipo": "pecho",
+    "descripcion": "Énfasis en pecho interno.",
+    "imagen": "https://via.placeholder.com/300x200?text=Flexiones+Laterales&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 58,
+    "nombre": "Dips en paralelas",
+    "tipo": "pecho",
+    "descripcion": "Peso corporal profundo.",
+    "imagen": "https://via.placeholder.com/300x200?text=Dips+Paralelas&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 59,
+    "nombre": "Aperturas con banda",
+    "tipo": "pecho",
+    "descripcion": "Resistencia variable.",
+    "imagen": "https://via.placeholder.com/300x200?text=Banda+Aperturas&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 60,
+    "nombre": "Gravedad negativa",
+    "tipo": "pecho",
+    "descripcion": "Trabajo excéntrico del pecho.",
+    "imagen": "https://via.placeholder.com/300x200?text=Gravedad+Negativa&bg=f39c12",
+    "parque": "Gym"
+  },
+  {
+    "id": 61,
+    "nombre": "Correr",
+    "tipo": "cardio",
+    "descripcion": "Cardio clásico al aire libre o treadmill.",
+    "imagen": "https://via.placeholder.com/300x200?text=Correr&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 62,
+    "nombre": "Caminar rápido",
+    "tipo": "cardio",
+    "descripcion": "Cardio de bajo impacto.",
+    "imagen": "https://via.placeholder.com/300x200?text=Caminar&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 63,
+    "nombre": "Natación",
+    "tipo": "cardio",
+    "descripcion": "Cardio total con bajo impacto.",
+    "imagen": "https://via.placeholder.com/300x200?text=Natacion&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 64,
+    "nombre": "Bicicleta estática",
+    "tipo": "cardio",
+    "descripcion": "Cardio sentado de bajo impacto.",
+    "imagen": "https://via.placeholder.com/300x200?text=Bici+Estatica&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 65,
+    "nombre": "Bicicleta al aire libre",
+    "tipo": "cardio",
+    "descripcion": "Cardio activo con variación de terreno.",
+    "imagen": "https://via.placeholder.com/300x200?text=Bici+Outdoor&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 66,
+    "nombre": "Elíptica",
+    "tipo": "cardio",
+    "descripcion": "Cardio de bajo impacto para todo el cuerpo.",
+    "imagen": "https://via.placeholder.com/300x200?text=Eliptica&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 67,
+    "nombre": "Remo",
+    "tipo": "cardio",
+    "descripcion": "Máquina o actividad acuática.",
+    "imagen": "https://via.placeholder.com/300x200?text=Remo&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 68,
+    "nombre": "HIIT",
+    "tipo": "cardio",
+    "descripcion": "Entrenamiento de alta intensidad en intervalos.",
+    "imagen": "https://via.placeholder.com/300x200?text=HIIT&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 69,
+    "nombre": "Saltar cuerda",
+    "tipo": "cardio",
+    "descripcion": "Cardio explosivo y coordinación.",
+    "imagen": "https://via.placeholder.com/300x200?text=Cuerda&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 70,
+    "nombre": "Burpees",
+    "tipo": "cardio",
+    "descripcion": "Cardio explosivo full-body.",
+    "imagen": "https://via.placeholder.com/300x200?text=Burpees&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 71,
+    "nombre": "Escaladora",
+    "tipo": "cardio",
+    "descripcion": "Cardio con énfasis en piernas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Escaladora&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 72,
+    "nombre": "Jump squats",
+    "tipo": "cardio",
+    "descripcion": "Sentadillas explosivas.",
+    "imagen": "https://via.placeholder.com/300x200?text=Jump+Squats&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 73,
+    "nombre": "Mountain climbers",
+    "tipo": "cardio",
+    "descripcion": "Dinámico para cardio y core.",
+    "imagen": "https://via.placeholder.com/300x200?text=Mountain&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 74,
+    "nombre": "Boxeo",
+    "tipo": "cardio",
+    "descripcion": "Cardio con coordinación y poder.",
+    "imagen": "https://via.placeholder.com/300x200?text=Boxeo&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 75,
+    "nombre": "Entrenador elíptico cruzado",
+    "tipo": "cardio",
+    "descripcion": "Máquina de cardio versátil.",
+    "imagen": "https://via.placeholder.com/300x200?text=Eliptico+Cruzado&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 76,
+    "nombre": "Escalera aeróbica",
+    "tipo": "cardio",
+    "descripcion": "Máquina de escaleras.",
+    "imagen": "https://via.placeholder.com/300x200?text=Escalera&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 77,
+    "nombre": "Sprint",
+    "tipo": "cardio",
+    "descripcion": "Corrida explosiva a máxima velocidad.",
+    "imagen": "https://via.placeholder.com/300x200?text=Sprint&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 78,
+    "nombre": "Trote",
+    "tipo": "cardio",
+    "descripcion": "Cardio moderado constante.",
+    "imagen": "https://via.placeholder.com/300x200?text=Trote&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 79,
+    "nombre": "Zumba",
+    "tipo": "cardio",
+    "descripcion": "Cardio divertido con ritmo.",
+    "imagen": "https://via.placeholder.com/300x200?text=Zumba&bg=27ae60",
+    "parque": "Gym"
+  },
+  {
+    "id": 80,
+    "nombre": "Kickboxing",
+    "tipo": "cardio",
+    "descripcion": "Cardio de artes marciales.",
+    "imagen": "https://via.placeholder.com/300x200?text=Kickboxing&bg=27ae60",
+    "parque": "Gym"
+  }
+]

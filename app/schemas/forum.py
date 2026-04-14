@@ -1,5 +1,10 @@
 from pydantic import BaseModel
 
+class ForumCategoryCreate(BaseModel):
+    name: str
+    description: str | None = None
+    icon: str | None = None
+
 class ForumCategoryResponse(BaseModel):
     name: str
     description: str

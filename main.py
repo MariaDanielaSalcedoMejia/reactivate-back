@@ -14,7 +14,7 @@ from app.config import DATABASE_URL
 app = FastAPI(
     title="ReActivate Pro API",
     description="Backend Python para la app de ReActivate Pro",
-    version="1.0.1"  # Updated version to force redeploy
+    version="1.1.0"  # Version con historial de salud
 )
 
 # Initialize database tables on startup (only for SQLite development)
@@ -25,14 +25,26 @@ def startup():
     if DATABASE_URL.startswith('sqlite'):
         init_db()
 
+# CORS Configuration - Permite conexiones desde frontend
+origins = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://reactivate-pro.vercel.app",
+    "https://reactivate-front.onrender.com",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200", "http://127.0.0.1:4200"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
+# Incluir rutas
 app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 app.include_router(blog_router, prefix="/api/blog", tags=["blog"])
 app.include_router(forum_router, prefix="/api/forum", tags=["forum"])
@@ -45,7 +57,7 @@ def healthcheck(db: Session = Depends(get_db)):
     try:
         # Test database connection
         db.execute(text("SELECT 1"))
-        return {"status": "ok", "database": "connected"}
+        return {"status": "ok", "database": "connected", "version": "1.1.0"}
     except Exception as e:
         return {"status": "error", "database": str(e)}
 
