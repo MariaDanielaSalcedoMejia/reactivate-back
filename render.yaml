@@ -6,7 +6,8 @@ services:
     plan: free
     branch: main
     buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
-    startCommand: python main.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.8"
+      - fromGroup: reactivate_env

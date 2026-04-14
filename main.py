@@ -21,10 +21,18 @@ app = FastAPI(
 # Initialize database tables on startup (only for SQLite development)
 @app.on_event("startup")
 def startup():
-    # Only initialize DB for SQLite (local development)
-    # PostgreSQL (production) already has the schema
-    if DATABASE_URL.startswith('sqlite'):
-        init_db()
+    try:
+        # Only initialize DB for SQLite (local development)
+        # PostgreSQL (production) already has the schema
+        if DATABASE_URL.startswith('sqlite'):
+            print("🔧 Initializing SQLite database...")
+            init_db()
+            print("✅ Database initialized successfully")
+        else:
+            print("✅ Using PostgreSQL - skipping database initialization")
+    except Exception as e:
+        print(f"❌ ERROR during startup: {str(e)}")
+        raise
 
 # CORS Configuration - Permite conexiones desde frontend
 origins = [
@@ -58,10 +66,20 @@ app.include_router(management_router)
 def healthcheck(db: Session = Depends(get_db)):
     try:
         # Test database connection
-        db.execute(text("SELECT 1"))
-        return {"status": "ok", "database": "connected", "version": "1.1.0"}
+        result = db.execute(text("SELECT 1"))
+        result.fetchone()
+        return {
+            "status": "ok",
+            "database": "connected",
+            "version": "1.1.0"
+        }
     except Exception as e:
-        return {"status": "error", "database": str(e)}
+        print(f"❌ Healthcheck error: {str(e)}")
+        return {
+            "status": "error",
+            "database": f"connection failed: {str(e)}",
+            "version": "1.1.0"
+        }
 
 if __name__ == "__main__":
     import uvicorn
