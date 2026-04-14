@@ -8,6 +8,7 @@ from app.controllers.forum_controller import router as forum_router
 from app.controllers.park_controller import router as park_router
 from app.controllers.exercise_controller import router as exercise_router
 from app.controllers.health_controller import router as health_router
+from app.management import router as management_router
 from app.db import init_db, get_db
 from app.config import DATABASE_URL
 
@@ -51,6 +52,7 @@ app.include_router(forum_router, prefix="/api/forum", tags=["forum"])
 app.include_router(park_router, prefix="/api/parks", tags=["parks"])
 app.include_router(exercise_router, prefix="/api/exercises", tags=["exercises"])
 app.include_router(health_router, prefix="/api/health", tags=["health"])
+app.include_router(management_router)
 
 @app.get("/api/healthcheck")
 def healthcheck(db: Session = Depends(get_db)):
