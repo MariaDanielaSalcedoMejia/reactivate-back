@@ -8,6 +8,36 @@ from app.repositories.user_repository import UserRepository
 
 router = APIRouter()
 
+# 🔹 OBTENER ANÁLISIS ESPECÍFICO (RUTA MÁS ESPECÍFICA - VA PRIMERO)
+@router.get('/analysis/{analysis_id}', response_model=HealthAnalysisResponse)
+def get_analysis(analysis_id: int, db: Session = Depends(get_db)):
+    """Obtiene los detalles completos de un análisis específico"""
+    analysis = HealthService.get_analysis_by_id(db, analysis_id)
+    if not analysis:
+        raise HTTPException(status_code=404, detail='Análisis no encontrado')
+    return analysis
+
+
+# 🔹 OBTENER HISTORIAL COMPLETO DE ANÁLISIS
+@router.get('/{user_id}/history', response_model=list[HealthAnalysisResponse])
+def get_analysis_history(user_id: int, db: Session = Depends(get_db)):
+    """Obtiene el historial completo de análisis de salud del usuario"""
+    history = HealthService.get_analysis_history(db, user_id)
+    if not history:
+        return []
+    return history
+
+
+# 🔹 OBTENER HISTORIAL SIMPLIFICADO (PARA GRÁFICAS)
+@router.get('/{user_id}/history-summary', response_model=list[HealthHistoryResponse])
+def get_history_summary(user_id: int, db: Session = Depends(get_db)):
+    """Obtiene un resumen del historial para gráficas y visualizaciones"""
+    history = HealthService.get_analysis_history(db, user_id)
+    if not history:
+        return []
+    return history
+
+
 # 🔹 GUARDAR / ACTUALIZAR PERFIL
 @router.post('/{user_id}', response_model=HealthProfileResponse)
 def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(get_db)):
@@ -46,43 +76,13 @@ def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(
         raise HTTPException(status_code=500, detail=f'Error guardando perfil: {str(e)}')
 
 
-# 🔹 OBTENER PERFIL ACTUAL
+# 🔹 OBTENER PERFIL ACTUAL (RUTA GENÉRICA - VA AL FINAL)
 @router.get('/{user_id}', response_model=HealthProfileResponse)
 def get_profile(user_id: int, db: Session = Depends(get_db)):
     profile = HealthService.get_profile(db, user_id)
     if not profile:
         raise HTTPException(status_code=404, detail='Perfil de salud no encontrado')
     return profile
-
-
-# 🔹 OBTENER HISTORIAL COMPLETO DE ANÁLISIS
-@router.get('/{user_id}/history', response_model=list[HealthAnalysisResponse])
-def get_analysis_history(user_id: int, db: Session = Depends(get_db)):
-    """Obtiene el historial completo de análisis de salud del usuario"""
-    history = HealthService.get_analysis_history(db, user_id)
-    if not history:
-        return []
-    return history
-
-
-# 🔹 OBTENER HISTORIAL SIMPLIFICADO (PARA GRÁFICAS)
-@router.get('/{user_id}/history-summary', response_model=list[HealthHistoryResponse])
-def get_history_summary(user_id: int, db: Session = Depends(get_db)):
-    """Obtiene un resumen del historial para gráficas y visualizaciones"""
-    history = HealthService.get_analysis_history(db, user_id)
-    if not history:
-        return []
-    return history
-
-
-# 🔹 OBTENER ANÁLISIS ESPECÍFICO
-@router.get('/analysis/{analysis_id}', response_model=HealthAnalysisResponse)
-def get_analysis(analysis_id: int, db: Session = Depends(get_db)):
-    """Obtiene los detalles completos de un análisis específico"""
-    analysis = HealthService.get_analysis_by_id(db, analysis_id)
-    if not analysis:
-        raise HTTPException(status_code=404, detail='Análisis no encontrado')
-    return analysis
 
 
 # 🔹 ELIMINAR PERFIL
