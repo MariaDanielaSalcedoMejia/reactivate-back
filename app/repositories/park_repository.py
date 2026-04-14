@@ -13,14 +13,14 @@ class ParkRepository:
 
     @staticmethod
     def create_park(db: Session, name: str, address: str | None, rating: float | None) -> Park:
+        """Create park. Caller is responsible for commit."""
         park = Park(name=name, address=address, rating=rating)
         db.add(park)
-        db.commit()
-        db.refresh(park)
         return park
 
     @staticmethod
     def update_park(db: Session, park_id: int, name: str | None, address: str | None, rating: float | None) -> Park | None:
+        """Update park. Caller is responsible for commit."""
         park = db.query(Park).filter(Park.id == park_id).first()
         if not park:
             return None
@@ -30,15 +30,13 @@ class ParkRepository:
             park.address = address
         if rating is not None:
             park.rating = rating
-        db.commit()
-        db.refresh(park)
         return park
 
     @staticmethod
     def delete_park(db: Session, park_id: int) -> bool:
+        """Delete park. Caller is responsible for commit."""
         park = db.query(Park).filter(Park.id == park_id).first()
         if not park:
             return False
         db.delete(park)
-        db.commit()
         return True

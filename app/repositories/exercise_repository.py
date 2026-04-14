@@ -13,14 +13,14 @@ class ExerciseRepository:
 
     @staticmethod
     def create_exercise(db: Session, nombre: str, tipo: str | None, descripcion: str | None, imagen: str | None) -> Exercise:
+        """Create exercise. Caller is responsible for commit."""
         exercise = Exercise(name=nombre, type=tipo, description=descripcion, image=imagen)
         db.add(exercise)
-        db.commit()
-        db.refresh(exercise)
         return exercise
 
     @staticmethod
     def update_exercise(db: Session, exercise_id: int, nombre: str | None, tipo: str | None, descripcion: str | None, imagen: str | None) -> Exercise | None:
+        """Update exercise. Caller is responsible for commit."""
         exercise = db.query(Exercise).filter(Exercise.id == exercise_id).first()
         if not exercise:
             return None
@@ -32,15 +32,13 @@ class ExerciseRepository:
             exercise.description = descripcion
         if imagen:
             exercise.image = imagen
-        db.commit()
-        db.refresh(exercise)
         return exercise
 
     @staticmethod
     def delete_exercise(db: Session, exercise_id: int) -> bool:
+        """Delete exercise. Caller is responsible for commit."""
         exercise = db.query(Exercise).filter(Exercise.id == exercise_id).first()
         if not exercise:
             return False
         db.delete(exercise)
-        db.commit()
         return True

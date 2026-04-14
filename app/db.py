@@ -15,12 +15,18 @@ def init_db():
 
 
 def get_db():
+    """Database session generator - handles transaction lifecycle
+    
+    Usage in routes:
+        - For successful operations: explicitly call db.commit() before returning
+        - For errors: exception handler will rollback automatically
+        - The finally block ensures cleanup
+    """
     db = SessionLocal()
     try:
         yield db
-        db.commit()  # Commit successful operations
-    except Exception:
-        db.rollback()  # Rollback on error
+    except Exception as e:
+        db.rollback()
         raise
     finally:
         db.close()

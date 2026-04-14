@@ -177,55 +177,66 @@ class HealthService:
         resting_hr: int,
         age: int | None = None
     ) -> HealthProfile:
-        """Crea o actualiza el perfil principal, y también crea un análisis en el historial"""
+        """Crea o actualiza el perfil principal, y también crea un análisis en el historial
         
-        # Obtener usuario para la edad si no se proporciona
-        if age is None:
-            user = UserRepository.get_by_id(db, user_id) if hasattr(UserRepository, 'get_by_id') else None
-            if user and user.birth_date:
-                age = HealthService.calculate_age_from_birth_date(user.birth_date)
-        
-        # Calcular métricas
-        imc, score, level, recommendation = HealthService.calculate_metrics(height_cm, weight_kg, resting_hr, age)
-        
-        # Actualizar perfil principal
-        profile = HealthRepository.create_or_update(
-            db, user_id, height_cm, weight_kg, resting_hr, imc, score, level, recommendation
-        )
-        
-        # Crear análisis en el historial
-        imc_category = HealthService.get_imc_category(imc)
-        heart_zones = HealthService.calculate_heart_zones(age, resting_hr)
-        health_summary = HealthService.generate_health_summary(imc, score, resting_hr, age)
-        warnings = HealthService.generate_warnings(imc, resting_hr)
-        suggestions = HealthService.generate_suggestions(imc, score, resting_hr)
-        
-        HealthAnalysisRepository.create_analysis(
-            db,
-            user_id=user_id,
-            height_cm=height_cm,
-            weight_kg=weight_kg,
-            resting_hr=resting_hr,
-            age=age,
-            imc=imc,
-            imc_category=imc_category,
-            score=score,
-            level=level,
-            recommendation=recommendation,
-            max_hr=heart_zones.get('max_hr'),
-            heart_reserve=heart_zones.get('heart_reserve'),
-            recovery_zone_min=heart_zones.get('recovery', {}).get('min'),
-            recovery_zone_max=heart_zones.get('recovery', {}).get('max'),
-            aerobic_zone_min=heart_zones.get('aerobic', {}).get('min'),
-            aerobic_zone_max=heart_zones.get('aerobic', {}).get('max'),
-            performance_zone_min=heart_zones.get('performance', {}).get('min'),
-            performance_zone_max=heart_zones.get('performance', {}).get('max'),
-            health_summary=health_summary,
-            warnings=json.dumps(warnings),
-            suggestions=json.dumps(suggestions)
-        )
-        
-        return profile
+        Gestiona la transacción completa - se debe hacer commit desde el controlador
+        """
+        try:
+            # Obtener usuario para la edad si no se proporciona
+            if age is None:
+                user = UserRepository.get_by_id(db, user_id) if hasattr(UserRepository, 'get_by_id') else None
+                if user and user.birth_date:
+                    age = HealthService.calculate_age_from_birth_date(user.birth_date)
+            
+            # Calcular métricas
+            imc, score, level, recommendation = HealthService.calculate_metrics(height_cm, weight_kg, resting_hr, age)
+            
+            # Actualizar perfil principal (no hace commit)
+            profile = HealthRepository.create_or_update(
+                db, user_id, height_cm, weight_kg, resting_hr, imc, score, level, recommendation
+            )
+            
+            # Crear análisis en el historial (no hace commit)
+            imc_category = HealthService.get_imc_category(imc)
+            heart_zones = HealthService.calculate_heart_zones(age, resting_hr)
+            health_summary = HealthService.generate_health_summary(imc, score, resting_hr, age)
+            warnings = HealthService.generate_warnings(imc, resting_hr)
+            suggestions = HealthService.generate_suggestions(imc, score, resting_hr)
+            
+            analysis = HealthAnalysisRepository.create_analysis(
+                db,
+                user_id=user_id,
+                height_cm=height_cm,
+                weight_kg=weight_kg,
+                resting_hr=resting_hr,
+                age=age,
+                imc=imc,
+                imc_category=imc_category,
+                score=score,
+                level=level,
+                recommendation=recommendation,
+                max_hr=heart_zones.get('max_hr'),
+                heart_reserve=heart_zones.get('heart_reserve'),
+                recovery_zone_min=heart_zones.get('recovery', {}).get('min'),
+                recovery_zone_max=heart_zones.get('recovery', {}).get('max'),
+                aerobic_zone_min=heart_zones.get('aerobic', {}).get('min'),
+                aerobic_zone_max=heart_zones.get('aerobic', {}).get('max'),
+                performance_zone_min=heart_zones.get('performance', {}).get('min'),
+                performance_zone_max=heart_zones.get('performance', {}).get('max'),
+                health_summary=health_summary,
+                warnings=json.dumps(warnings),
+                suggestions=json.dumps(suggestions)
+            )
+            
+            # Make sure objects are properly attached to session
+            db.flush()
+            
+            return profile
+            
+        except Exception as e:
+            # Log error but don't commit - let caller handle rollback
+            print(f"Error in create_or_update_profile: {e}")
+            raise
 
     @staticmethod
     def get_profile(db: Session, user_id: int) -> HealthProfile | None:

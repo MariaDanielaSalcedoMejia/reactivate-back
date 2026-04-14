@@ -55,7 +55,7 @@ def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(
         if data.resting_hr > 200:
             raise HTTPException(status_code=400, detail='FC en reposo inválida (>200)')
         
-        # Crear o actualizar profile
+        # Crear o actualizar profile - this handles both profile and analysis in one transaction
         profile = HealthService.create_or_update_profile(
             db,
             user_id,
@@ -64,13 +64,20 @@ def save_profile(user_id: int, data: HealthProfileCreate, db: Session = Depends(
             data.resting_hr,
             data.age
         )
+        
+        # Explicit commit - all or nothing
+        db.commit()
+        db.refresh(profile)  # Refresh to get latest values after commit
+        
         return profile
     except HTTPException:
         raise
     except ValueError as e:
+        db.rollback()
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        print(f"Error saving health profile: {e}")  # Log para debug
+        db.rollback()
+        print(f"Error saving health profile: {e}")
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f'Error guardando perfil: {str(e)}')

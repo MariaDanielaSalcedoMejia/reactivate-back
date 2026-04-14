@@ -55,8 +55,7 @@ class HealthAnalysisRepository:
             suggestions=suggestions
         )
         db.add(analysis)
-        db.commit()
-        db.refresh(analysis)
+        # NOTE: Do NOT commit here - let the caller handle transaction
         return analysis
 
     @staticmethod
@@ -80,12 +79,12 @@ class HealthAnalysisRepository:
 
     @staticmethod
     def delete_analysis(db: Session, analysis_id: int) -> bool:
-        """Elimina un análisis específico"""
+        """Delete analysis. Caller is responsible for commit."""
         analysis = db.query(HealthAnalysis).filter(HealthAnalysis.id == analysis_id).first()
         if not analysis:
             return False
         db.delete(analysis)
-        db.commit()
+        # NOTE: Do NOT commit here - let the caller handle transaction
         return True
 
     @staticmethod

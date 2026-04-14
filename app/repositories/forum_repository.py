@@ -13,10 +13,9 @@ class ForumRepository:
 
     @staticmethod
     def create_category(db: Session, name: str, description: str | None = None, icon: str | None = None) -> ForumCategory:
+        """Create category. Caller is responsible for commit."""
         category = ForumCategory(name=name, description=description or '', icon=icon or '')
         db.add(category)
-        db.commit()
-        db.refresh(category)
         return category
 
     @staticmethod
@@ -29,6 +28,7 @@ class ForumRepository:
 
     @staticmethod
     def create_post(db: Session, title: str, content: str, excerpt: str | None, author_id: int | None, category_id: int | None) -> ForumPost:
+        """Create post. Caller is responsible for commit."""
         post = ForumPost(
             title=title,
             content=content,
@@ -37,15 +37,13 @@ class ForumRepository:
             category_id=category_id
         )
         db.add(post)
-        db.commit()
-        db.refresh(post)
         return post
 
     @staticmethod
     def delete_post(db: Session, post_id: int) -> bool:
+        """Delete post. Caller is responsible for commit."""
         post = db.query(ForumPost).filter(ForumPost.id == post_id).first()
         if not post:
             return False
         db.delete(post)
-        db.commit()
         return True
