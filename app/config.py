@@ -8,7 +8,7 @@ load_dotenv(BASE_DIR / '.env')
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL is None:
-    DATABASE_URL = 'postgresql+psycopg://reactivate_user:06gm6LKLjlJGmfjGr8tEqpbYQnV7E3Cv@dpg-d78u7u95pdvs73banbh0-a/reactivate'
+    DATABASE_URL = 'postgresql://reactivate_q9ms_user:6RfYltaUu10ME0w6gFf46aTo7mWAu3Jg@dpg-d7f9047lk1mc73d82mag-a/reactivate_q9ms'
 elif DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql+psycopg://', 1)
 elif DATABASE_URL.startswith('postgresql://'):
