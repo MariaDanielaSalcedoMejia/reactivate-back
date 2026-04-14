@@ -9,11 +9,10 @@ load_dotenv(BASE_DIR / '.env')
 # Get DATABASE_URL from environment variable (required on production)
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-# If DATABASE_URL not set in environment, try to use a fallback for development
+# If DATABASE_URL not set in environment, use the new database for development
 if DATABASE_URL is None:
-    # This fallback should only be used for local development
-    # On production (Render), DATABASE_URL MUST be set as an environment variable
-    DATABASE_URL = 'postgresql+psycopg://reactivate_user:06gm6LKLjlJGmfjGr8tEqpbYQnV7E3Cv@dpg-d78u7u95pdvs73banbh0-a/reactivate'
+    # Fallback for local development with new database
+    DATABASE_URL = 'postgresql+psycopg://reactivate_q9ms_user:6RfYltaUu10ME0w6gFf46aTo7mWAu3Jg@dpg-d7f9047lk1mc73d82mag-a.oregon-postgres.render.com:5432/reactivate_q9ms?sslmode=require'
     print("⚠️  WARNING: DATABASE_URL not set in environment. Using fallback (development only).")
 else:
     print("✅ DATABASE_URL loaded from environment variable")

@@ -10,4 +10,5 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.8"
-      - fromGroup: reactivate_env
+      - key: DATABASE_URL
+        fromGroup: reactivate_env
